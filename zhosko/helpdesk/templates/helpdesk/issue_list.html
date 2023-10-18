@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Issue List</title>
+</head>
+<body>
+    <h2>Issue List</h2>
+    <p>{{user}}</p>
+    <table>
+        <ul>
+            {% for issue in issues %}
+                <li>
+                    <a href="{% url 'issue_detail' issue.id %}">{{ issue.name }}</a>
+                    (Status: {{ issue.status }})
+                    {% if issue.status != 'resolved' %}
+                        <p>Actions: {{ issue.actions }}</p>
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+    </table>
+    <ul><li><a href="{% url 'create_issue' %}">Create New Issue</a></li>
+</body>
+</html>

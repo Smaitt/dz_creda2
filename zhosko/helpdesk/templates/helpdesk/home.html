@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HelpDesk</title>
+</head>
+<body>
+    <header>
+        <h1>HelpDesk</h1>
+        <nav>
+            <ul>
+                <li><a href="{% url 'create_issue' %}">Create Issue</a></li>
+                {% if user.is_authenticated %}
+                    <li><a href="{% url 'issue_list' %}">Issue List</a></li>
+                {% else %}
+                    <li><a href="{% url 'register' %}">Register</a></li>
+                    <li><a href="{% url 'login' %}">Login</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+    </header>
+</body>
+</html>

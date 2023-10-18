@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Issue Details</title>
+</head>
+<body>
+    <h2>Issue Details</h2>
+<p>Name: {{ issue.name }}</p>
+<p>Phone: {{ issue.phone }}</p>
+<p>Email: {{ issue.email }}</p>
+<p>Description: {{ issue.description }}</p>
+<p>Priority: {{ issue.priority }}</p>
+
+<form method="post" action="">
+    {% csrf_token %}
+    <label for="actions">Actions:</label>
+    <textarea name="actions" id="actions">{{ issue.actions }}</textarea><br>
+    <label for="status">Status:</label>
+    <select name="status" id="status">
+        <option value="new" {% if issue.status == 'new' %}selected{% endif %}>New</option>
+        <option value="in_progress" {% if issue.status == 'in_progress' %}selected{% endif %}>In Progress</option>
+        <option value="resolved" {% if issue.status == 'resolved' %}selected{% endif %}>Resolved</option>
+        {% if is_tester %}
+        <option value="confirmed" {% if issue.status == 'confirmed' %}selected{% endif %}>confirmed</option>
+        {% endif %}
+    </select><br>
+    <button type="submit">Save</button>
+</form>
+<a href="{% url 'issue_list' %}">Back to Issue List</a>
+</body>
+</html>
